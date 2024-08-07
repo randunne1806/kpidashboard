@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--   ***** Link To Custom Stylesheet *****   -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <!-- *******  Font Awesome Icons Link  ******* -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+	<style>
+		/* Popup container - can be anything you want */
+		.popup {
+		  position: relative;
+		  display: inline-block;
+		  cursor: pointer;
+		  -webkit-user-select: none;
+		  -moz-user-select: none;
+		  -ms-user-select: none;
+		  user-select: none;
+		}
+		
+		/* The actual popup */
+		.popup .popuptext {
+		  visibility: hidden;
+		  width: 160px;
+		  background-color: #555;
+		  color: #fff;
+		  text-align: center;
+		  border-radius: 6px;
+		  padding: 8px 0;
+		  position: absolute;
+		  z-index: 1;
+		  bottom: 125%;
+		  left: 50%;
+		  margin-left: -80px;
+		}
+		
+		/* Popup arrow */
+		.popup .popuptext::after {
+		  content: "";
+		  position: absolute;
+		  top: 100%;
+		  left: 50%;
+		  margin-left: -5px;
+		  border-width: 5px;
+		  border-style: solid;
+		  border-color: #555 transparent transparent transparent;
+		}
+		
+		/* Toggle this class - hide and show the popup */
+		.popup .show {
+		  visibility: visible;
+		  -webkit-animation: fadeIn 1s;
+		  animation: fadeIn 1s;
+		}
+
+		/* Toggle this class - hide and show the popup */
+		.popup .graphshow {
+		  visibility: visible;
+		  -webkit-animation: fadeIn 1s;
+		  animation: fadeIn 1s;
+		}
+		
+		/* Add animation (fade in the popup) */
+		@-webkit-keyframes fadeIn {
+		  from {opacity: 0;} 
+		  to {opacity: 1;}
+		}
+		
+		@keyframes fadeIn {
+		  from {opacity: 0;}
+		  to {opacity:1 ;}
+		}
+		</style>
+  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <body>
+    <!--   *** Page Wrapper Starts ***   -->
+    <div class="page-wrapper">
+      <script>
+        // When the user clicks on div, open the popup
+        function myFunction() {
+          var popup = document.getElementById("myChart");
+          popup.classList.toggle("graphshow");
+        }
+      </script>
+
+      <!--   *** Top Bar Starts ***   -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <div class="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- <div class="logo">
+			<img src="images/logo.png">
+		</div> -->
+        </div>
+
+        <div class="search-box">
+          <input type="text" class="input-box" placeholder="Search..." />
+          <span class="search-btn">
+            <i class="fa-solid fa-search"></i>
+          </span>
+        </div>
+
+        <div class="top-bar-right">
+          <div class="mode-switch">
+            <i class="fa-solid fa-moon"></i>
+          </div>
+          <!-- <div class="notifications">
+			<i class="fa-solid fa-bell"></i>
+		</div> -->
+          <!-- <div class="profile">
+			<img src="images/profile-img.jpg">
+		</div> -->
+        </div>
+      </div>
+      <!--   *** Top Bar Ends ***   -->
+
+      <!--   === Side Bar Starts ===   -->
+      <aside class="side-bar">
+        <!--   === Nav Bar Links Starts ===   -->
+        <span class="menu-label">MENU</span>
+        <ul class="navbar-links navbar-links-1">
+          <li class="active">
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-house"></i>
+              </span>
+              <span class="nav-text">Sales</span>
+            </a>
+          </li>
+          <li>
+            <a href="./product.html">
+              <span class="nav-icon">
+                <i class="fa-solid fa-tasks"></i>
+              </span>
+              <span class="nav-text">Product</span>
+            </a>
+          </li>
+          <li>
+            <a href="./quality.html">
+              <span class="nav-icon">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <span class="nav-text">Quality</span>
+            </a>
+          </li>
+          <li>
+            <a href="./purchasing.html">
+              <span class="nav-icon">
+                <i class="fa-solid fa-bell"></i>
+              </span>
+              <span class="nav-text">Purchasing</span>
+            </a>
+          </li>
+          <li>
+            <a href="./shipping.html">
+              <span class="nav-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </span>
+              <span class="nav-text">Shipping</span>
+            </a>
+          </li>
+        </ul>
+        <!--   === Nav Bar Links Ends ===   -->
+        <!--   === Side Bar Footer Starts ===   -->
+        <div class="sidebar-footer">
+          <div class="settings">
+            <span class="gear-icon">
+              <i class="fa-solid fa-gear"></i>
+            </span>
+            <span class="text">Settings</span>
+          </div>
+          <div class="logoutBtn">
+            <span class="logout-icon">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+            <span class="text">Logout</span>
+          </div>
+        </div>
+        <!--   === Side Bar Footer Ends ===   -->
+      </aside>
+      <!--   === Side Bar Ends ===   -->
+
+      <!--   === Contents Section Starts ===   -->
+      <div class="contents">
+        <!--   === Panel Bar Starts ===   -->
+        <div class="panel-bar">
+          <div class="row-1">
+            <h1><b>Sales</b></h1>
+          </div>
+          <!-- <div class="row-2">
+			<a href="#" class="active">Overwiew</a> -->
+          <!-- <a href="#">Products</a>
+			<a href="#">Total </a>
+			<a href="#">Perchases</a> -->
+          <!-- </div> -->
+        </div>
+		
+        <!--   === Panel Bar Ends ===   -->
+        <!--   === Description Starts ===   -->
+        <div class="description">
+          <!--   === Column 1 Starts ===   -->
+          <div class="col-1">
+            <!--   === Boxes Row Starts ===   -->
+            <div class="boxes-row">
+              <div class="balance-box" onclick="myFunction()">
+                <div class="subject-row" id="showGraph" >
+                  <div class="text" >
+                    <h3>New Part Quote Captured percent.</h3>
+                    <h1>60%<sub>percentage</sub></h1>
+                  </div>
+                  <!-- <div class="icon">
+						<i class="fa-solid fa-arrow-down"></i>
+					</div> -->
+                  <div class="icon">
+                    <!-- <i class="fa-solid fa-arrow-down"></i> -->
+                   <!-- <h1 id="showGraph">helloworld</h1> -->
+					<!-- <div class="popup" onclick="myFunction()"> -->
+						 <!-- <button class="button">Details</button> -->
+						 <i class="fa-solid fa-arrow-down"></i>
+						<!-- <span class="popuptext" id="myPopup">A Simple Popup!</span> -->
+						<!-- <canvas class="myChart"   id="myChart" width="800px" height="400px" style="background-color:white;"></canvas> Canvas for the graph -->
+						<div id="graphModal" class="modal" >
+							<div class="modal-content" style="background-color:rgb(165, 172, 187)">
+								<span class="close">&times;</span> <!-- Close button -->
+								<h2>Sales Report</h2>
+								<canvas id="myChart" width="400" height="200"></canvas> <!-- Canvas for the graph -->
+							</div>
+						</div>
+					<!-- </div> -->
+					<script src="pop_script.js"></script> <!-- Include JavaScript file -->
+                 
+				</div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="20%"
+                      style="max-width: 23%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3 class="active">Sales Revenue</h3>
+                    <h1>$70,452<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-up"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="91%"
+                      style="max-width: 91%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>Gross Profit</h3>
+                    <h1>$64,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="73%"
+                      style="max-width: 73%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>Net Profit</h3>
+                    <h1>$70,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="73%"
+                      style="max-width: 73%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>New Part Quotes</h3>
+                    <h1>$50,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="73%"
+                      style="max-width: 73%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>Existing quotes completed</h3>
+                    <h1>$23,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="43%"
+                      style="max-width: 43%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>Existing quotes completed</h3>
+                    <h1>$34,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="34%"
+                      style="max-width: 33%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>Daily number of purchase orders</h3>
+                    <h1>$64,261<sub>(USD)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="64%"
+                      style="max-width: 63%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="balance-box">
+                <div class="subject-row">
+                  <div class="text">
+                    <h3>New Customers Quoted</h3>
+                    <h1>261<sub>(number)</sub></h1>
+                  </div>
+                  <div class="icon">
+                    <i class="fa-solid fa-arrow-down"></i>
+                  </div>
+                </div>
+                <div class="progress-row">
+                  <div class="subject">progress</div>
+                  <div class="progress-bar">
+                    <div
+                      class="progress-line"
+                      value="20%"
+                      style="max-width: 23%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--   === Boxes Row Ends ===   -->
+            <!--   === Analytics Chart Starts ===   -->
+            <!-- <div class="chart">
+			<div class="chart-header">
+				<h2>Sales Revenue Analytics</h2>
+				<input type="month" class="date" value="2023-12">
+			</div>
+			<div class="chart-contents">
+				<section class="chart-grid">
+					<div class="grid-line" value="100%"></div>
+					<div class="grid-line" value="80%"></div>
+					<div class="grid-line" value="60%"></div>
+					<div class="grid-line" value="40%"></div>
+					<div class="grid-line" value="20%"></div>
+					<div class="grid-line" value="0%"></div>
+				</section>
+				<section class="chart-value-wrapper">
+					<div class="chart-value" style="max-height: 62%"></div>
+					<div class="chart-value" style="max-height: 76%"></div>
+					<div class="chart-value" style="max-height: 70%"></div>
+					<div class="chart-value" style="max-height: 82%"></div>
+					<div class="chart-value" style="max-height: 78%"></div>
+					<div class="chart-value" style="max-height: 94%"></div>
+				</section>
+				<section class="chart-labels">
+					<div>Jul</div>
+					<div>Aug</div>
+					<div>Sep</div>
+					<div>Oct</div>
+					<div>Nov</div>
+					<div>Dec</div>
+				</section>
+			</div>
+		</div> -->
+            <!--   === Analytics Chart Ends ===   -->
+          </div>
+          <!--   === Existing quotes completed  ===   -->
+          <!-- <div class="col-2"> -->
+          <!-- <div class="top-products">
+				<header class="products-header">
+					<h1>New Part Quotes </h1>
+				</header>
+				<div class="products-wrapper">
+					
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-1.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Ear Phones</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-2.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Cosmetics</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-3.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Mouse</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-4.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Ceramic</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-5.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Laptop</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-6.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Head Phones</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-7.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Nick Shoes</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-8.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Leather Shoes</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="top-products">
+				<header class="products-header">
+					<h1>Existing quotes completed </h1>
+				</header>
+				<div class="products-wrapper">
+					
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-1.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Ear Phones</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-2.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Cosmetics</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-3.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Mouse</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-6.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Head Phones</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="product">
+						<div class="product-img">
+							<img src="images/products/product-8.jpg">
+						</div>
+						<div class="product-desc">
+							<div class="product-row-1">
+								<h2>Leather Shoes</h2>
+								<i class="fa-solid fa-shopping-cart"></i>
+							</div>
+							<div class="product-row-2">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div> -->
+          <!--   === Top Products Ends ===   -->
+          <!--   === Total Balance Card Starts ===   -->
+          <!-- <div class="balance-card">
+				<div class="balance-card-top">
+					<div class="text">
+						<h3>Total Income</h3>
+						<h1>$70,452<sub>(USD)</sub></h1>
+					</div>
+					<div class="icon">
+						<i class="fa-solid fa-arrow-up"></i>
+					</div>
+				</div>
+				<div class="balance-card-middle">
+					<div class="subject">Progress</div>
+					<div class="progress-bar">
+						<div class="progress-line" value="93%" style="max-width: 93%"></div>
+					</div>
+				</div>
+				<div class="balance-card-bottom">
+					<button class="btn-top-up">
+						Top Up<i class="fa-solid fa-arrow-up"></i>
+					</button>
+					<button class="btn-transfer">
+						Transfer<i class="fa-solid fa-arrow-up"></i>
+					</button>
+				</div>
+			</div>  -->
+          <!--   === Total Balance Card Ends ===  
+		</div> -->
+          <!--   === Column 2 Ends ===   -->
+        </div>
+        <!--   === Description Ends ===   -->
+      </div>
+      <!--   === Contents Section Ends ===   -->
+    </div>
+    <!--   *** Page Wrapper Ends ***   -->
+
+    <!--   *** Link To Custom Script File ***   -->
+    <script type="text/javascript" src="script.js"></script>
+	<script>
+const xValues = ["January",
+"February",
+"March",
+"April",
+"May",
+"June",
+"July",
+"August",
+"September",
+"October",
+"November",
+"December",];
+const yValues = [70,80,65,19,9,29,40,21,94,4,75,90];
+
+new Chart("myChart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      label: "Sales monthly",
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "#1f1d2a",
+      borderColor: "#ff9900",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: true},
+    scales: {
+      yAxes: [{ticks: {min: 0, max:100, text: 'sales report'}}],
+    }
+  }
+});
+</script>
+
+  </body>
+</html>
